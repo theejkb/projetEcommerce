@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../components/Home.vue'
 import Identification from "../components/Identification";
 import Connexion from "../components/Connexion";
+import Accueil from "../components/Accueil";
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/connexion',
     name: 'connexion',
     component: Connexion
+  },
+  {
+    path: '/accueil',
+    name: 'accueil',
+    component: Accueil
   }
 ]
 

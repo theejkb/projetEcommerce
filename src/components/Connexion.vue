@@ -1,16 +1,18 @@
 <template>
     <div>
         <h1>Connection au site</h1>
-
-        <form name="connexion" method="get">
+        <h5 v-if="msgErreur !==''"> {{msgErreur}} </h5>
+        <form @submit="connectUser" name="connexion">
             <p>
-                <input type="text" name="username" value="" placeholder="utilisateur" />
+                <input v-model="user.username" type="text" name="username" placeholder="utilisateur"/>
             </p>
             <p>
-                <input type="text" name="password" value="" placeholder="mot de passe" />
+                <input v-model="user.password" type="text" name="password" placeholder="mot de passe"/>
             </p>
+            <button type="submit">Connexion</button>
         </form>
-        <button>Connexion</button>
+
+
     </div>
 </template>
 
@@ -18,16 +20,34 @@
     export default {
         name: "Connexion",
         props: {
-            msg: String,
+
         },
         data() {
             return {
                 fakeUser: {
                     username: 'steven',
-                    password:'azertyuiop',
-                }
+                    password: 'azertyuiop',
+                },
+                user: {
+                    username: '',
+                    password: '',
+                    isConnected: false,
+                },
+                msgErreur: '',
             }
-        }
+        },
+        methods: {
+            connectUser(e) {
+                e.preventDefault();
+                if (this.user.username === this.fakeUser.username && this.user.password === this.fakeUser.password) {
+                    this.user.isConnected = true;
+                    this.msgErreur='';
+                    this.$router.push({ path: '/Accueil' })
+                } else {
+                    this.msgErreur='Erreur d\'authentification';
+                }
+             }
+         }
     }
 </script>
 
